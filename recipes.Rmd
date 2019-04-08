@@ -33,229 +33,7 @@ knitr::read_chunk('R/fimd.R')
 
 ## Main question
 
-*Can we use MICE-algorithm for multilevel data, and if so, how?*
-
-## Stochastic regression imputation
-
-```{r duo = TRUE, fig.width=4.5, fig.height=2.25}
-## ----sri-----------------------------------------------------------------
-data <- airquality[, c("Ozone", "Solar.R")]
-imp <- mice(data, method = "norm.nob", m = 1, maxit = 1,
-            seed = 1, print = FALSE)
-
-## ----plotsri, duo = TRUE, echo=FALSE, fig.width=4.5, fig.height=2.25-----
-lwd <- 0.6
-data <- complete(imp)
-Yobs <- airquality[, "Ozone"]
-Yimp <- data[, "Ozone"]
-mi.hist(Yimp, Yobs,
-        b = seq(-20, 200, 10), type = "continuous",
-        gray = FALSE, lwd = lwd,
-        obs.lwd = 1.5, mis.lwd = 1.5, imp.lwd = 1.5,
-        obs.col = mdc(4),mis.col = mdc(5), imp.col = "transparent",
-        mlt = 0.08, main = "", xlab = "Ozone (ppb)")
-box(lwd = 1)
-plot(data[cci(imp), 2:1], col = mdc(1),
-     lwd = 1.5, ylab = "Ozone (ppb)",
-     xlab = "Solar Radiation (lang)", ylim = c(-10, 170),
-     axes = FALSE)
-points(data[ici(imp), 2:1], col = mdc(2), lwd = 1.5)
-axis(1, lwd = lwd)
-axis(2, lwd = lwd, las = 1)
-box(lwd = 1)
-```
-
-
-## Missing data patterns, multivariate
-
-```{r patterns}
-```
-
-## Three general strategies
-
-- Monotone data imputation
-- Joint modeling
-- Fully conditional specification (FCS)
-
-## Imputation of monotone pattern
-
-```{r, fig.align='center'}
-data <- expand.grid(rec = 1:8, var = 1:4)
-data$r <- c(rep(1, 8), rep(3, 2), rep(1, 6), rep(3, 4), rep(1, 4), rep(3, 5), rep(1, 3))
-levelplot(r~var+rec, data=data,
-            as.table=FALSE, aspect="iso",
-            shrink=c(0.9),
-            col.regions = c(mdc(1), mdc(2), "grey90"), 
-            cuts = 2,
-            colorkey=FALSE,
-            scales=list(draw=FALSE),
-            xlab="", ylab="",
-            between = list(x=1,y=0),
-            strip = strip.custom(bg = "grey95", style = 1,
-                                 factor.levels = types))
-```
-
-## Imputation of monotone pattern
-
-```{r, fig.align='center'}
-data <- expand.grid(rec = 1:8, var = 1:4)
-data$r <- c(rep(1, 8), rep(2, 2), rep(1, 6), rep(3, 4), rep(1, 4), rep(3, 5), rep(1, 3))
-levelplot(r~var+rec, data=data,
-            as.table=FALSE, aspect="iso",
-            shrink=c(0.9),
-            col.regions = c(mdc(1), mdc(2), "grey90"), 
-            cuts = 2,
-            colorkey=FALSE,
-            scales=list(draw=FALSE),
-            xlab="", ylab="",
-            between = list(x=1,y=0),
-            strip = strip.custom(bg = "grey95", style = 1,
-                                 factor.levels = types))
-```
-
-## Imputation of monotone pattern
-
-```{r, fig.align='center'}
-data <- expand.grid(rec = 1:8, var = 1:4)
-data$r <- c(rep(1, 8), rep(2, 2), rep(1, 6), rep(2, 4), rep(1, 4), rep(3, 5), rep(1, 3))
-levelplot(r~var+rec, data=data,
-            as.table=FALSE, aspect="iso",
-            shrink=c(0.9),
-            col.regions = c(mdc(1), mdc(2), "grey90"), 
-            cuts = 2,
-            colorkey=FALSE,
-            scales=list(draw=FALSE),
-            xlab="", ylab="",
-            between = list(x=1,y=0),
-            strip = strip.custom(bg = "grey95", style = 1,
-                                 factor.levels = types))
-```
-
-## Imputation of monotone pattern
-
-```{r, fig.align='center'}
-data <- expand.grid(rec = 1:8, var = 1:4)
-data$r <- c(rep(1, 8), rep(2, 2), rep(1, 6), rep(2, 4), rep(1, 4), rep(2, 5), rep(1, 3))
-levelplot(r~var+rec, data=data,
-            as.table=FALSE, aspect="iso",
-            shrink=c(0.9),
-            col.regions = c(mdc(1), mdc(2)), 
-            cuts = 1,
-            colorkey=FALSE,
-            scales=list(draw=FALSE),
-            xlab="", ylab="",
-            between = list(x=1,y=0),
-            strip = strip.custom(bg = "grey95", style = 1,
-                                 factor.levels = types))
-```
-
-## Imputation by joint modelling
-
-```{r, fig.align='center'}
-data <- expand.grid(rec = 1:8, var = 1:3)
-data$r <- c(rep(3, 2), rep(1, 6), rep(3, 3), rep(1, 5), rep(1, 3), rep(3, 5))
-levelplot(r~var+rec, data=data,
-            as.table=FALSE, aspect="iso",
-            shrink=c(0.9),
-            col.regions = c(mdc(1), mdc(2), "grey90"), 
-            cuts = 2,
-            colorkey=FALSE,
-            scales=list(draw=FALSE),
-            xlab="", ylab="",
-            between = list(x=1,y=0),
-            strip = strip.custom(bg = "grey95", style = 1,
-                                 factor.levels = types))
-```
-
-## Imputation by joint modelling
-
-```{r, fig.align='center'}
-data <- expand.grid(rec = 1:8, var = 1:3)
-data$r <- c(rep(3, 2), rep(1, 6), rep(3, 3), rep(1, 5), rep(1, 3), rep(2, 5))
-levelplot(r~var+rec, data=data,
-            as.table=FALSE, aspect="iso",
-            shrink=c(0.9),
-            col.regions = c(mdc(1), mdc(2), "grey90"), 
-            cuts = 2,
-            colorkey=FALSE,
-            scales=list(draw=FALSE),
-            xlab="", ylab="",
-            between = list(x=1,y=0),
-            strip = strip.custom(bg = "grey95", style = 1,
-                                 factor.levels = types))
-```
-
-## Imputation by joint modelling
-
-```{r, fig.align='center'}
-data <- expand.grid(rec = 1:8, var = 1:3)
-data$r <- c(rep(3, 2), rep(1, 6), rep(3, 2), 2, rep(1, 5), rep(1, 3), rep(2, 5))
-levelplot(r~var+rec, data=data,
-            as.table=FALSE, aspect="iso",
-            shrink=c(0.9),
-            col.regions = c(mdc(1), mdc(2), "grey90"), 
-            cuts = 2,
-            colorkey=FALSE,
-            scales=list(draw=FALSE),
-            xlab="", ylab="",
-            between = list(x=1,y=0),
-            strip = strip.custom(bg = "grey95", style = 1,
-                                 factor.levels = types))
-```
-
-## Imputation by joint modelling
-
-```{r, fig.align='center'}
-data <- expand.grid(rec = 1:8, var = 1:3)
-data$r <- c(rep(2, 2), rep(1, 6), rep(2, 2), 2, rep(1, 5), rep(1, 3), rep(2, 5))
-levelplot(r~var+rec, data=data,
-            as.table=FALSE, aspect="iso",
-            shrink=c(0.9),
-            col.regions = c(mdc(1), mdc(2)), 
-            cuts = 1,
-            colorkey=FALSE,
-            scales=list(draw=FALSE),
-            xlab="", ylab="",
-            between = list(x=1,y=0),
-            strip = strip.custom(bg = "grey95", style = 1,
-                                 factor.levels = types))
-```
-
-## Imputation by joint modelling - next iteration
-
-```{r, fig.align='center'}
-data <- expand.grid(rec = 1:8, var = 1:3)
-data$r <- c(rep(4, 2), rep(1, 6), rep(4, 3), rep(1, 5), rep(1, 3), rep(4, 5))
-levelplot(r~var+rec, data=data,
-            as.table=FALSE, aspect="iso",
-            shrink=c(0.9),
-            col.regions = c(mdc(1), mdc(2), "grey90", hcl(0, 100, 40, 0.3)), 
-            cuts = 2,
-            colorkey=FALSE,
-            scales=list(draw=FALSE),
-            xlab="", ylab="",
-            between = list(x=1,y=0),
-            strip = strip.custom(bg = "grey95", style = 1,
-                                 factor.levels = types))
-```
-
-## Imputation by joint modelling - next iteration
-
-```{r, fig.align='center'}
-data <- expand.grid(rec = 1:8, var = 1:3)
-data$r <- c(rep(4, 2), rep(1, 6), rep(4, 3), rep(1, 5), rep(1, 3), rep(2, 5))
-levelplot(r~var+rec, data=data,
-            as.table=FALSE, aspect="iso",
-            shrink=c(0.9),
-            col.regions = c(mdc(1), mdc(2), "grey90", hcl(0, 100, 40, 0.3)), 
-            cuts = 2,
-            colorkey=FALSE,
-            scales=list(draw=FALSE),
-            xlab="", ylab="",
-            between = list(x=1,y=0),
-            strip = strip.custom(bg = "grey95", style = 1,
-                                 factor.levels = types))
-```
+*Can we use `mice` for multilevel data, and if so, how?*
 
 ## Imputation by fully conditional specification
 
@@ -271,8 +49,7 @@ levelplot(r~var+rec, data=data,
             scales=list(draw=FALSE),
             xlab="", ylab="",
             between = list(x=1,y=0),
-            strip = strip.custom(bg = "grey95", style = 1,
-                                 factor.levels = types))
+            strip = FALSE)
 ```
 
 
@@ -290,8 +67,7 @@ levelplot(r~var+rec, data=data,
             scales=list(draw=FALSE),
             xlab="", ylab="",
             between = list(x=1,y=0),
-            strip = strip.custom(bg = "grey95", style = 1,
-                                 factor.levels = types))
+            strip = FALSE)
 ```
 
 ## Imputation by fully conditional specification
@@ -308,8 +84,7 @@ levelplot(r~var+rec, data=data,
             scales=list(draw=FALSE),
             xlab="", ylab="",
             between = list(x=1,y=0),
-            strip = strip.custom(bg = "grey95", style = 1,
-                                 factor.levels = types))
+            strip = FALSE)
 ```
 
 ## Imputation by fully conditional specification
@@ -326,8 +101,7 @@ levelplot(r~var+rec, data=data,
             scales=list(draw=FALSE),
             xlab="", ylab="",
             between = list(x=1,y=0),
-            strip = strip.custom(bg = "grey95", style = 1,
-                                 factor.levels = types))
+            strip = FALSE)
 ```
 
 ## Imputation by fully conditional specification
@@ -344,8 +118,7 @@ levelplot(r~var+rec, data=data,
             scales=list(draw=FALSE),
             xlab="", ylab="",
             between = list(x=1,y=0),
-            strip = strip.custom(bg = "grey95", style = 1,
-                                 factor.levels = types))
+            strip = FALSE)
 ```
 
 ## Imputation by fully conditional specification - next iteration
@@ -362,8 +135,7 @@ levelplot(r~var+rec, data=data,
             scales=list(draw=FALSE),
             xlab="", ylab="",
             between = list(x=1,y=0),
-            strip = strip.custom(bg = "grey95", style = 1,
-                                 factor.levels = types))
+            strip = FALSE)
 ```
 
 ## Imputation by fully conditional specification - next iteration
@@ -380,20 +152,10 @@ levelplot(r~var+rec, data=data,
             scales=list(draw=FALSE),
             xlab="", ylab="",
             between = list(x=1,y=0),
-            strip = strip.custom(bg = "grey95", style = 1,
-                                 factor.levels = types))
+            strip = FALSE)
 ```
 
-## Which predictors?
 
-1. Include all variables that appear in the complete-data model
-2. Include variables related to the nonresponse
-3. Include variables that explain a considerable amount of variance
-4. Remove from variables selected in steps 2 and 3 those variables
-   that have too many missing values within the subgroup of
-   incomplete cases
-
-*Does this recipe also apply to multilevel data?*
 
 ## `brandsma` data
 
@@ -546,39 +308,13 @@ levelplot(r~var+rec, data=data,
 ```
 
 
-## Nine challenges in multilevel imputation (1 of 3)
-
-1. For small clusters the within-cluster mean and variance are unreliable estimates, so the choice of the prior distribution becomes critical.
-
-2. For a small number of clusters, it is difficult to estimate the between-cluster variance of the random effects.
-
-3. In applications with systematically missing data, there are no observed values in the cluster, so the cluster location cannot be estimated.
-
-## Nine challenges in multilevel imputation  (2 of 3)
-
-4. The variation of the random slopes can be large, and some methods have difficulty handling this.
-
-5. The error variance $\sigma_\epsilon^2$ may differ across clusters (heteroscedasticity), whereas the standard model assumes equal error variances.
-
-6. The residual error distributions can be far from normal, e.g., for categorical data.
-
-## Nine challenges in multilevel imputation (3 of 3)
-
-7. The model may contain aggregates of the level-1 variables, such as cluster means, which need to be taken in account during imputation.
-
-8. The model may contain interactions, or other nonlinear terms.
-
-9. It may not be possible to fit the multilevel model, or there are convergence problems.
-
-See [Van Buuren (2018)](https://stefvanbuuren.name/fimd/sec-missmult.html)
-
-
-## Fully conditional specification
+## Fully conditional specification for multilevel data
 
 \begin{align}
 \dot{{\texttt{lpo}}}_{ic} & \sim N(\beta_0 + \beta_1 {{\texttt{den}}}_{c} + \beta_2 {{\texttt{sex}}}_{ic} + u_{0c}, \sigma_\epsilon^2)\\
 \dot{{\texttt{sex}}}_{ic} & \sim N(\beta_0 + \beta_1 {{\texttt{den}}}_{c} + \beta_2 {{\texttt{lpo}}}_{ic} + u_{0c}, \sigma_\epsilon^2)
 \end{align}
+
 
 ## Theoretical problem with FCS
 
@@ -593,16 +329,6 @@ Resche-Rigon & White (2018) suggest the imputation model
 - should incorporate the cluster means of level-1 predictors 
 - be heteroscedastic if cluster sizes vary
 
-## Univariate continuous multilevel imputation in `mice`
-![](figures/fig1.png)
-
-## Univariate binary and count multilevel imputation in `mice`
-![](figures/fig3.png)
-
-## Univariate level-2 imputation in `mice`
-![](figures/fig2.png)
-
-
 ## General imputation/modeling sequence - START SIMPLE
 
 1. Pick a simple complete-data model
@@ -615,10 +341,10 @@ See <https://stefvanbuuren.name/fimd/sec-mlguidelines.html>
 
 ## Seven imputation templates, increasing complexity
 
-1. Intercept-only model, missing outcomes
-2. Random intercepts, missing level-1 predictor
+1. *Intercept-only model, missing outcomes*
+2. *Random intercepts, missing level-1 predictor*
 3. Random intercepts, contextual model
-4. Random intercepts, missing level-2 predictor
+4. *Random intercepts, missing level-2 predictor*
 5. Random intercepts, interactions
 6. Random slopes, missing outcomes and predictors
 7. Random slopes, interactions
@@ -710,6 +436,17 @@ gridExtra::grid.arrange(p.pmm2)
 ```{r mla.ril2p6}
 ```
 
+## Classic recipe for single-level data: Which predictors?
+
+1. Include all variables that appear in the complete-data model
+2. Include variables related to the nonresponse
+3. Include variables that explain a considerable amount of variance
+4. Remove from variables selected in steps 2 and 3 those variables
+   that have too many missing values within the subgroup of
+   incomplete cases
+
+*Does this recipe also apply to multilevel data?*
+
 
 ## Recipe: Missing level-1
 
@@ -741,7 +478,7 @@ gridExtra::grid.arrange(p.pmm2)
 
 ## Conclusion
 
-*Can we use MICE-algorithm for multilevel data, and if so, how?*
+*Can we use `mice` for multilevel data, and if so, how?*
 
 - Hot spot of current research
 - Multilevel imputation: more complex, but doable

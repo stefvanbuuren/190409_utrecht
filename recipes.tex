@@ -129,159 +129,53 @@
 \begin{document}
 \frame{\titlepage}
 
-\begin{frame}{Main question}
+\begin{frame}[fragile]{Main question}
 
-\emph{Can we use MICE-algorithm for multilevel data, and if so, how?}
-
-\end{frame}
-
-\begin{frame}{Stochastic regression imputation}
-
-\includegraphics{recipes_files/figure-beamer/unnamed-chunk-1-1.pdf}
+\emph{Can we use \texttt{mice} for multilevel data, and if so, how?}
 
 \end{frame}
 
-\begin{frame}{Missing data patterns, multivariate}
+\begin{frame}{Imputation by fully conditional specification}
 
-\includegraphics{recipes_files/figure-beamer/patterns-1.pdf}
-
-\end{frame}
-
-\begin{frame}{Three general strategies}
-
-\begin{itemize}
-\tightlist
-\item
-  Monotone data imputation
-\item
-  Joint modeling
-\item
-  Fully conditional specification (FCS)
-\end{itemize}
+\begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-1-1} \end{center}
 
 \end{frame}
 
-\begin{frame}{Imputation of monotone pattern}
+\begin{frame}{Imputation by fully conditional specification}
 
 \begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-2-1} \end{center}
 
 \end{frame}
 
-\begin{frame}{Imputation of monotone pattern}
+\begin{frame}{Imputation by fully conditional specification}
 
 \begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-3-1} \end{center}
 
 \end{frame}
 
-\begin{frame}{Imputation of monotone pattern}
+\begin{frame}{Imputation by fully conditional specification}
 
 \begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-4-1} \end{center}
 
 \end{frame}
 
-\begin{frame}{Imputation of monotone pattern}
+\begin{frame}{Imputation by fully conditional specification}
 
 \begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-5-1} \end{center}
 
 \end{frame}
 
-\begin{frame}{Imputation by joint modelling}
+\begin{frame}{Imputation by fully conditional specification - next
+iteration}
 
 \begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-6-1} \end{center}
 
 \end{frame}
 
-\begin{frame}{Imputation by joint modelling}
+\begin{frame}{Imputation by fully conditional specification - next
+iteration}
 
 \begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-7-1} \end{center}
-
-\end{frame}
-
-\begin{frame}{Imputation by joint modelling}
-
-\begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-8-1} \end{center}
-
-\end{frame}
-
-\begin{frame}{Imputation by joint modelling}
-
-\begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-9-1} \end{center}
-
-\end{frame}
-
-\begin{frame}{Imputation by joint modelling - next iteration}
-
-\begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-10-1} \end{center}
-
-\end{frame}
-
-\begin{frame}{Imputation by joint modelling - next iteration}
-
-\begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-11-1} \end{center}
-
-\end{frame}
-
-\begin{frame}{Imputation by fully conditional specification}
-
-\begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-12-1} \end{center}
-
-\end{frame}
-
-\begin{frame}{Imputation by fully conditional specification}
-
-\begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-13-1} \end{center}
-
-\end{frame}
-
-\begin{frame}{Imputation by fully conditional specification}
-
-\begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-14-1} \end{center}
-
-\end{frame}
-
-\begin{frame}{Imputation by fully conditional specification}
-
-\begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-15-1} \end{center}
-
-\end{frame}
-
-\begin{frame}{Imputation by fully conditional specification}
-
-\begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-16-1} \end{center}
-
-\end{frame}
-
-\begin{frame}{Imputation by fully conditional specification - next
-iteration}
-
-\begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-17-1} \end{center}
-
-\end{frame}
-
-\begin{frame}{Imputation by fully conditional specification - next
-iteration}
-
-\begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-18-1} \end{center}
-
-\end{frame}
-
-\begin{frame}{Which predictors?}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Include all variables that appear in the complete-data model
-\item
-  Include variables related to the nonresponse
-\item
-  Include variables that explain a considerable amount of variance
-\item
-  Remove from variables selected in steps 2 and 3 those variables that
-  have too many missing values within the subgroup of incomplete cases
-\end{enumerate}
-
-\emph{Does this recipe also apply to multilevel data?}
 
 \end{frame}
 
@@ -393,94 +287,37 @@ With multilevel data, missingness may be in:
 
 \begin{frame}{Univariate missing, level-1 outcome}
 
-\begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-20-1} \end{center}
+\begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-9-1} \end{center}
 
 \end{frame}
 
 \begin{frame}{Univariate missing, level-1 predictor, sporadically
 missing}
 
-\begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-21-1} \end{center}
+\begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-10-1} \end{center}
 
 \end{frame}
 
 \begin{frame}{Univariate missing, level-1 predictor, systematically
 missing}
 
-\begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-22-1} \end{center}
+\begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-11-1} \end{center}
 
 \end{frame}
 
 \begin{frame}{Univariate missing, level-2 predictor}
 
-\begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-23-1} \end{center}
+\begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-12-1} \end{center}
 
 \end{frame}
 
 \begin{frame}{Multivariate missing}
 
-\begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-24-1} \end{center}
+\begin{center}\includegraphics{recipes_files/figure-beamer/unnamed-chunk-13-1} \end{center}
 
 \end{frame}
 
-\begin{frame}{Nine challenges in multilevel imputation (1 of 3)}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  For small clusters the within-cluster mean and variance are unreliable
-  estimates, so the choice of the prior distribution becomes critical.
-\item
-  For a small number of clusters, it is difficult to estimate the
-  between-cluster variance of the random effects.
-\item
-  In applications with systematically missing data, there are no
-  observed values in the cluster, so the cluster location cannot be
-  estimated.
-\end{enumerate}
-
-\end{frame}
-
-\begin{frame}{Nine challenges in multilevel imputation (2 of 3)}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{3}
-\item
-  The variation of the random slopes can be large, and some methods have
-  difficulty handling this.
-\item
-  The error variance \(\sigma_\epsilon^2\) may differ across clusters
-  (heteroscedasticity), whereas the standard model assumes equal error
-  variances.
-\item
-  The residual error distributions can be far from normal, e.g., for
-  categorical data.
-\end{enumerate}
-
-\end{frame}
-
-\begin{frame}{Nine challenges in multilevel imputation (3 of 3)}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{6}
-\item
-  The model may contain aggregates of the level-1 variables, such as
-  cluster means, which need to be taken in account during imputation.
-\item
-  The model may contain interactions, or other nonlinear terms.
-\item
-  It may not be possible to fit the multilevel model, or there are
-  convergence problems.
-\end{enumerate}
-
-See \href{https://stefvanbuuren.name/fimd/sec-missmult.html}{Van Buuren
-(2018)}
-
-\end{frame}
-
-\begin{frame}{Fully conditional specification}
+\begin{frame}{Fully conditional specification for multilevel data}
 
 \begin{align}
 \dot{{\texttt{lpo}}}_{ic} & \sim N(\beta_0 + \beta_1 {{\texttt{den}}}_{c} + \beta_2 {{\texttt{sex}}}_{ic} + u_{0c}, \sigma_\epsilon^2)\\
@@ -516,38 +353,6 @@ Resche-Rigon \& White (2018) suggest the imputation model
 
 \end{frame}
 
-\begin{frame}{Univariate continuous multilevel imputation in
-\texttt{mice}}
-
-\begin{figure}
-\centering
-\includegraphics{figures/fig1.png}
-\caption{}
-\end{figure}
-
-\end{frame}
-
-\begin{frame}{Univariate binary and count multilevel imputation in
-\texttt{mice}}
-
-\begin{figure}
-\centering
-\includegraphics{figures/fig3.png}
-\caption{}
-\end{figure}
-
-\end{frame}
-
-\begin{frame}{Univariate level-2 imputation in \texttt{mice}}
-
-\begin{figure}
-\centering
-\includegraphics{figures/fig2.png}
-\caption{}
-\end{figure}
-
-\end{frame}
-
 \begin{frame}{General imputation/modeling sequence - START SIMPLE}
 
 \begin{enumerate}
@@ -575,13 +380,13 @@ See \url{https://stefvanbuuren.name/fimd/sec-mlguidelines.html}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Intercept-only model, missing outcomes
+  \emph{Intercept-only model, missing outcomes}
 \item
-  Random intercepts, missing level-1 predictor
+  \emph{Random intercepts, missing level-1 predictor}
 \item
   Random intercepts, contextual model
 \item
-  Random intercepts, missing level-2 predictor
+  \emph{Random intercepts, missing level-2 predictor}
 \item
   Random intercepts, interactions
 \item
@@ -825,9 +630,9 @@ See \url{https://stefvanbuuren.name/fimd/sec-mlguidelines.html}
 ##                 estimate std.error statistic   df  p.value
 ## (Intercept)       40.071    0.4549     88.09  187 0.000000
 ## iqv                2.516    0.0532     47.34 1242 0.000000
-## as.factor(den)2    2.041    0.5925      3.45  430 0.000626
-## as.factor(den)3    0.234    0.6519      0.36  285 0.719431
-## as.factor(den)4    1.843    1.1642      1.58 1041 0.113755
+## as.factor(den)2    2.041    0.5925      3.45  430 0.000589
+## as.factor(den)3    0.234    0.6519      0.36  285 0.719226
+## as.factor(den)4    1.843    1.1642      1.58 1041 0.113706
 \end{verbatim}
 
 \begin{verbatim}
@@ -836,6 +641,26 @@ See \url{https://stefvanbuuren.name/fimd/sec-mlguidelines.html}
 ## Residual~~Residual         40.761
 ## ICC|sch                     0.175
 \end{verbatim}
+
+\end{frame}
+
+\begin{frame}{Classic recipe for single-level data: Which predictors?}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Include all variables that appear in the complete-data model
+\item
+  Include variables related to the nonresponse
+\item
+  Include variables that explain a considerable amount of variance
+\item
+  Remove from variables selected in steps 2 and 3 those variables that
+  have too many missing values within the subgroup of incomplete cases
+\end{enumerate}
+
+\emph{Does this recipe also apply to multilevel data?}
 
 \end{frame}
 
@@ -890,9 +715,9 @@ target\tabularnewline
 
 \end{frame}
 
-\begin{frame}{Conclusion}
+\begin{frame}[fragile]{Conclusion}
 
-\emph{Can we use MICE-algorithm for multilevel data, and if so, how?}
+\emph{Can we use \texttt{mice} for multilevel data, and if so, how?}
 
 \begin{itemize}
 \tightlist
